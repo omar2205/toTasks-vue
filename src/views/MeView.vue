@@ -35,5 +35,6 @@ list.getUserLists()
 .wrapper {
   max-width: 26rem;
   margin: 0 auto;
+  padding: 0 1rem;
 }
 </style>
