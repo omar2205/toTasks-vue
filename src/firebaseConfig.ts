@@ -1,5 +1,7 @@
 import { type FirebaseOptions, initializeApp } from 'firebase/app'
-import { getAuth, browserLocalPersistence, setPersistence } from 'firebase/auth'
+import { browserLocalPersistence, initializeAuth } from 'firebase/auth'
+import { indexedDBLocalPersistence } from 'firebase/auth/cordova'
+import { getFirestore } from 'firebase/firestore'
 
 const firebaseConfig: FirebaseOptions = {
   apiKey: 'AIzaSyCacZxcCAeGnqqIVUxDYz0q4DlMtycz4sk',
@@ -11,7 +13,8 @@ const firebaseConfig: FirebaseOptions = {
 }
 
 export const app = initializeApp(firebaseConfig)
-export const auth = getAuth(app)
-;(async () => {
-  await setPersistence(auth, browserLocalPersistence)
-})()
+export const db = getFirestore(app)
+// export const auth = getAuth(app)
+export const auth = initializeAuth(app, {
+  persistence: [indexedDBLocalPersistence, browserLocalPersistence],
+})
