@@ -1,16 +1,17 @@
 import { type FirebaseOptions, initializeApp } from 'firebase/app'
-import { getAuth } from 'firebase/auth'
+import { getAuth, browserLocalPersistence, setPersistence } from 'firebase/auth'
 
 const firebaseConfig: FirebaseOptions = {
-  apiKey: process.env.VUE_APP_FIREBASE_API_KEY,
-  appId: process.env.VUE_APP_FIREBASE_APP_ID,
-  authDomain: process.env.VUE_APP_FIREBASE_AUTH_DOMAIN,
-  databaseURL: process.env.VUE_APP_FIREBASE_DATABASE_URL,
-  measurementId: process.env.VUE_APP_FIREBASE_MEASUREMENT_ID,
-  messagingSenderId: process.env.VUE_APP_FIREBASE_MESSAGING_SENDER_ID,
-  projectId: process.env.VUE_APP_FIREBASE_PROJECT_ID,
-  storageBucket: process.env.VUE_APP_FIREBASE_STORAGE_BUCKET,
+  apiKey: 'AIzaSyCacZxcCAeGnqqIVUxDYz0q4DlMtycz4sk',
+  authDomain: 'totasks-vue.firebaseapp.com',
+  projectId: 'totasks-vue',
+  storageBucket: 'totasks-vue.appspot.com',
+  messagingSenderId: '588498396092',
+  appId: '1:588498396092:web:ab310dfb71defe9c2f01b9',
 }
 
 export const app = initializeApp(firebaseConfig)
-export const auth = getAuth()
+export const auth = getAuth(app)
+;(async () => {
+  await setPersistence(auth, browserLocalPersistence)
+})()
