@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useAuthStore } from '@/stores/auth'
 import { useListStore } from '@/stores/list'
+import NewList from '@/components/NewList.vue'
 
 const auth = useAuthStore()
 auth.getUser()
@@ -12,6 +13,7 @@ list.getUserLists()
 <template>
   <div class="wrapper">
     <h1>Welcome {{ auth.user?.email }}</h1>
+    <NewList />
     <n-list hoverable clickable v-for="l in list.lists">
       <n-list-item>
         <n-thing :title="l.name" content-style="margin-top: 10px;">
@@ -26,7 +28,6 @@ list.getUserLists()
         </n-thing>
       </n-list-item>
     </n-list>
-    <pre>{{ JSON.stringify(list.lists) }}</pre>
   </div>
 </template>
 

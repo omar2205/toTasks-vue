@@ -4,28 +4,36 @@ import { defineStore } from 'pinia'
 import { auth, db } from '@/firebaseConfig'
 import {
   addDoc,
+  doc,
   collection,
+  deleteDoc,
+  getDoc,
   getDocs,
   query,
   where,
 } from 'firebase/firestore'
 
 interface ListItem {
+  id?: string
   title: string
   type: 'movie' | 'tv-show'
   rating?: number
+  tags?: string[]
 }
 
 interface List {
+  id?: string
   name: string
-  items: ListItem[]
+  description?: string
+  items?: ListItem[]
   userId?: string
+  tags?: string[]
 }
 
 const lists_collection = collection(db, 'lists')
 
 export const useListStore = defineStore('lists', () => {
-  const lists = ref<List[] | any>([])
+  const lists = ref<List[]>([])
 
   async function getUserLists() {
     await auth.authStateReady()
@@ -35,7 +43,7 @@ export const useListStore = defineStore('lists', () => {
       const querySnapshot = await getDocs(q)
       lists.value = querySnapshot.docs.map((doc) => ({
         id: doc.id,
-        ...doc.data(),
+        ...(doc.data() as List),
       }))
     }
   }
@@ -50,18 +58,19 @@ export const useListStore = defineStore('lists', () => {
       return docRef
     }
   }
-  async function c() {
-    const demoList: List = {
-      name: 'Demo List',
-      items: []
+
+  async function removeList(listid: string) {
+    const user = auth.currentUser
+    if (user) {
+      const docRef = await getDoc(doc(db, 'list', listid))
+      if (docRef.get('userId') === user.uid) await deleteDoc(docRef.ref)
     }
-    await createList(demoList)
   }
 
   return {
     lists,
     getUserLists,
     createList,
-    c,
+    removeList,
   }
 })
