@@ -31,6 +31,7 @@ interface List {
 }
 
 const lists_collection = collection(db, 'lists')
+const lists_doc = (listid: string) => doc(db, 'lists', listid)
 
 export const useListStore = defineStore('lists', () => {
   const lists = ref<List[]>([])
@@ -68,9 +69,10 @@ export const useListStore = defineStore('lists', () => {
     }
   }
 
-  async function getListById(listid: string) {
+  async function getListById(listid: string, data = false) {
     if (!listid) return null
-    const docRef = await getDoc(doc(db, 'list', listid))
+    const docRef = await getDoc(lists_doc(listid))
+    if (data) return docRef.data()
     return docRef
   }
 

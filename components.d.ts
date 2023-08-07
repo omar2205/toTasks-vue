@@ -18,6 +18,7 @@ declare module 'vue' {
     NCard: typeof import('naive-ui')['NCard']
     NCol: typeof import('naive-ui')['NCol']
     NConfigProvider: typeof import('naive-ui')['NConfigProvider']
+    NDivider: typeof import('naive-ui')['NDivider']
     NDynamicTags: typeof import('naive-ui')['NDynamicTags']
     NewList: typeof import('./src/components/NewList.vue')['default']
     NForm: typeof import('naive-ui')['NForm']
