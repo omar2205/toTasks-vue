@@ -32,6 +32,11 @@ const router = createRouter({
       name: 'user-me',
       component: () => import('../views/MeView.vue'),
     },
+    {
+      path: '/l/:id',
+      name: 'list-view',
+      component: () => import('../views/ListView.vue'),
+    },
   ],
 })
 

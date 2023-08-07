@@ -62,9 +62,16 @@ export const useListStore = defineStore('lists', () => {
   async function removeList(listid: string) {
     const user = auth.currentUser
     if (user) {
-      const docRef = await getDoc(doc(db, 'list', listid))
-      if (docRef.get('userId') === user.uid) await deleteDoc(docRef.ref)
+      const docRef = await getListById(listid)
+      if (docRef && docRef.get('userId') === user.uid)
+        await deleteDoc(docRef.ref)
     }
+  }
+
+  async function getListById(listid: string) {
+    if (!listid) return null
+    const docRef = await getDoc(doc(db, 'list', listid))
+    return docRef
   }
 
   return {
@@ -72,5 +79,6 @@ export const useListStore = defineStore('lists', () => {
     getUserLists,
     createList,
     removeList,
+    getListById,
   }
 })
