@@ -43,7 +43,7 @@ const loginUser = async () => {
       <n-row :gutter="[0, 24]">
         <n-col :span="24">
           <div style="display: flex; justify-content: flex-end; gap: 0.5rem;">
-            <n-button round type="secondary" @click="() => router.push('/login')">Register</n-button>
+            <n-button round type="secondary" @click="() => router.push('/register')">Register</n-button>
             <n-button round type="primary" @click="loginUser">Login</n-button>
           </div>
         </n-col>
