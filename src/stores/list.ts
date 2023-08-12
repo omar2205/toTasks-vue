@@ -12,14 +12,7 @@ import {
   query,
   where,
 } from 'firebase/firestore'
-
-interface ListItem {
-  id?: string
-  title: string
-  type: 'movie' | 'tv-show'
-  rating?: number
-  tags?: string[]
-}
+import type { ListItem } from './list-item'
 
 interface List {
   id?: string
