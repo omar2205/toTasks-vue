@@ -16,7 +16,7 @@ Deno.serve(async (req: Request) => {
     headers: {
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*',
-      'hello': 'there',
+      'hello': 'there/1',
     }
   })
 })
