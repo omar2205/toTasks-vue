@@ -15,6 +15,6 @@ jobs:
         uses: denoland/deployctl@v1
         with:
           project: imdb-search-omar2205
-          entrpoint: main.ts
+          entrypoint: main.ts
           root: deno_api
           token: ${{ secrets.GH_TOTASKS_DEPLOY }}
