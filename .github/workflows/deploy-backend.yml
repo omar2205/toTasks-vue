@@ -21,3 +21,5 @@ jobs:
           entrypoint: main.ts
           root: deno_api
           token: ${{ secrets.GH_TOTASKS_DEPLOY }}
+        env:
+          DENO_DEPLOY_TOKEN: ${{ secrets.GH_TOTASKS_DEPLOY }}
