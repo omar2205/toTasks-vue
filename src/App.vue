@@ -2,7 +2,7 @@
 import { RouterLink, RouterView } from 'vue-router'
 import { useOsTheme, darkTheme } from 'naive-ui'
 import { computed } from 'vue'
-import { useAuthStore, protected_routes } from '@/stores/auth'
+import { useAuthStore } from '@/stores/auth'
 import LoadingFullScreen from '@/components/LoadingFullScreen.vue'
 
 const osThemeRef = useOsTheme()

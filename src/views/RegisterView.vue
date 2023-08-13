@@ -22,7 +22,7 @@ const registerUser = async () => {
     router.push('/me')
   } catch (err) {
     console.log(err)
-    if (err.message.includes('email-already-in-use'))
+    if ((err as Error).message.includes('email-already-in-use'))
       message.error('This email is already in use. Try login in')
     else message.error('Error Registering. Try again later.')
   }
