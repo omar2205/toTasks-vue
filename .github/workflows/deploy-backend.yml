@@ -1,0 +1,20 @@
+name: Deploy backend to Deno Deploy
+
+on:
+  push:
+    paths:
+      - 'backend/**'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Deploy to Deno
+        uses: denoland/deployctl@v1
+        with:
+          project: imdb-search-omar2205
+          entrpoint: main.ts
+          root: deno_api
+          token: ${{ secrets.GH_TOTASKS_DEPLOY }}
