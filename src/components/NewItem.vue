@@ -1,21 +1,23 @@
 <script setup lang="ts">
 import { type ListItem, itemTypes, useListItemStore } from '@/stores/list-item'
 import { useMessage, type FormInst } from 'naive-ui'
-import { ref } from 'vue'
+import { ref, h } from 'vue'
 import { useRoute } from 'vue-router'
+import SearchIMDB from '@/components/SearchIMDB.vue'
 
 const message = useMessage()
 const route = useRoute()
 const isOpen = ref(false)
 const formRef = ref<FormInst | null>(null)
 
-type ItemForm = { title: string, rating: number, type: typeof itemTypes[number]['value'], url: string }
+type ItemForm = { title: string, rating: number, type: typeof itemTypes[number]['value'], url: string, imdbId?: string }
 
 const formValue = ref<ItemForm>({
   title: '',
   rating: 1,
   type: itemTypes[0]['value'],
   url: '',
+  imdbId: '',
 })
 const tags = ref<string[]>([])
 
@@ -42,6 +44,7 @@ const createItem = async () => {
       type: formValue.value.type,
       rating: formValue.value.rating,
       tags: tags.value,
+      imdbId: formValue.value.imdbId,
     }
     await listItems.addItemToList(route.params.id as string, item)
   } catch (err) {
@@ -50,12 +53,18 @@ const createItem = async () => {
   }
   toggleModal()
 }
+
+const handleItemSelect = (item: {l: string, id: string}) => {
+  formValue.value.title = item.l
+  formValue.value.imdbId = item.id
+}
 </script>
 
 <template>
   <n-button @click="toggleModal" quaternary type="primary">New Item</n-button>
   <n-modal v-model:show="isOpen" preset="dialog" title="New item">
     <n-form ref="formRef" :model="formValue">
+      <SearchIMDB @select="handleItemSelect" />
       <n-form-item label="Item name *" path="title">
         <n-input required v-model:value="formValue.title" type="text" placeholder="Title" />
       </n-form-item>
