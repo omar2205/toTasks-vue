@@ -3,7 +3,7 @@ name: Deploy backend to Deno Deploy
 on:
   push:
     paths:
-      - 'backend/**'
+      - 'deno_api/**'
 
 jobs:
   deploy:
