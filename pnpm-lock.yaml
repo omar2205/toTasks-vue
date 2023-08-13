@@ -1,6 +1,13 @@
 lockfileVersion: '6.0'
 
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
 dependencies:
+  '@phosphor-icons/vue':
+    specifier: ^2.1.6
+    version: 2.1.6(vue@3.3.4)
   firebase:
     specifier: ^10.1.0
     version: 10.1.0(react-native@0.72.3)
@@ -2335,6 +2342,15 @@ packages:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.15.0
     dev: true
+
+  /@phosphor-icons/vue@2.1.6(vue@3.3.4):
+    resolution: {integrity: sha512-j4iVvNT4JbDR2udIVfakKZHd14i3jCvO4b24OC0W/1rasftU8qVg1Tnb3QDwAT0teNU+UxvaM+kCWxfGHC2dUg==}
+    engines: {node: '>=14'}
+    peerDependencies:
+      vue: '>=3.2.39'
+    dependencies:
+      vue: 3.3.4
+    dev: false
 
   /@protobufjs/aspromise@1.1.2:
     resolution: {integrity: sha512-j+gKExEuLmKwvz3OgROXtrJ2UG2x8Ch2YZUxahh+s1F2HZ+wAceUNLkvy6zKCPVRkU++ZWQrdxsUeQXmcg4uoQ==}

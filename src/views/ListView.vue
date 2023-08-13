@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { useListStore } from '@/stores/list';
-import { ref } from 'vue';
+import { PhStar } from '@phosphor-icons/vue'
+import { ref } from 'vue'
 import { useRoute } from 'vue-router'
 import NewItemVue from '@/components/NewItem.vue'
+import { useListStore } from '@/stores/list'
 
 const list = ref()
 
@@ -23,6 +24,14 @@ lists.getListById(route.params.id as string, true).then(l => list.value = l)
       <n-button quaternary type="error">Remove list</n-button>
     </div>
     <n-divider />
+    <n-card v-if="list.items" v-for="item in list.items" :title="item.title">
+      <template #footer>
+        <template v-if="item.rating">
+          <ph-star weight="fill" />
+          {{ item.rating }}
+        </template>
+      </template>
+    </n-card>
     {{ JSON.stringify(list, null, 2) }}
   </div>
 </template>
