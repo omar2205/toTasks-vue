@@ -43,8 +43,9 @@ const createItem = async () => {
       rating: formValue.value.rating,
       tags: tags.value,
     }
-    listItems.addItemToList(route.params.id as string, item)
+    await listItems.addItemToList(route.params.id as string, item)
   } catch (err) {
+    message.error('Uknown error')
     console.error(err)
   }
   toggleModal()

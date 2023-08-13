@@ -28,6 +28,7 @@ export interface ListItem {
   type: (typeof itemTypes)[number]['value']
   rating?: number
   tags?: string[]
+  imdbId?: string
 }
 
 const lists_collection = collection(db, 'lists')
@@ -42,7 +43,7 @@ export const useListItemStore = defineStore('list-items', () => {
     const user = auth.currentUser
     if (user) {
       const listData = (await lists.getListById(listId, true)) as DocumentData
-      if (!listData) throw new Error('NOT_LIST')
+      if (!listData) throw new Error('NO_LIST')
       if (user.uid !== listData.userId) throw new Error('NOT_LIST_OWNER')
       const items = listData.items || []
       await updateDoc(lists_doc(listId), {
