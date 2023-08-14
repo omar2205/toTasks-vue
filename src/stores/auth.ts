@@ -17,7 +17,10 @@ type NewUser = {
   displayName: string
 }
 
-export const open_routes = ['/login', '/register']
+export const open_routes = [
+  `${import.meta.env.BASE_URL}login`,
+  `${import.meta.env.BASE_URL}register`,
+]
 
 export const useAuthStore = defineStore('auth', () => {
   const user = ref<User | null>(null)
@@ -44,7 +47,7 @@ export const useAuthStore = defineStore('auth', () => {
     )
     if (res) {
       setUser(res.user)
-      window.location.href = '/me'
+      window.location.href = `${import.meta.env.BASE_URL}me`
     }
     //else throw new Error('login failed')
   }
@@ -57,10 +60,10 @@ export const useAuthStore = defineStore('auth', () => {
   async function getUser() {
     onAuthStateChanged(auth, async (user) => {
       // if not logged in and we are not in open routes
+      console.log(window.location.pathname)
       if (!user && !open_routes.includes(window.location.pathname)) {
-        window.location.href = '/login'
-      }
-      else setUser(user)
+        window.location.href = `${import.meta.env.BASE_URL}login`
+      } else setUser(user)
     })
     return false
   }
