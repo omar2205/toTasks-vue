@@ -26,14 +26,26 @@ listStore.getListById(route.params.id as string, true)
       <n-button quaternary type="error">Remove list</n-button>
     </div>
     <n-divider />
-    <n-card v-for="item in list.items || []" :title="item.title">
-      <template #footer>
-        <template v-if="item.rating">
-          <ph-star weight="fill" />
-          {{ item.rating }}
+    <div class="cards">
+      <n-card hoverable v-for="item in list.items || []" :title="item.title">
+        <template #footer>
+          <template v-if="item.rating">
+            <ph-star weight="fill" />
+            {{ item.rating }}
+          </template>
         </template>
-      </template>
-    </n-card>
-    {{ JSON.stringify(list, null, 2) }}
+      </n-card>
+    </div>
   </div>
 </template>
+
+<style>
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.n-card--hoverable {
+  cursor: pointer;
+}
+</style>
